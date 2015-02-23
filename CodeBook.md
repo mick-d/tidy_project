@@ -2,18 +2,19 @@
 
 ## Description
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+# 1) Merges the training and the test sets to create one data set.
+The command `rbind` is used on the resulting merged data is named `all.set`
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+# 2) Extracts only the measurements on the mean and standard deviation for each measurement. 
+A regular expression is used to find all the features containing the strings "mean()" or "std()".
+The associated indices are then used to filter the merged data and only select the relevant features.
 
-```{r}
-summary(cars)
-```
+# 3) Uses descriptive activity names to name the activities in the data set.
+The activities are added to the merged data. Then they are transformed as factors
+and renamed, using the content of the file `activity_labels.txt`
 
-You can also embed plots, for example:
-
-```{r, echo=FALSE}
-plot(cars)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+# 4) Appropriately labels the data set with descriptive variable names.
+We select only the feature names as according to the previous selection (cf step 2)
+and remove parentheses from the associated names.
+These new names are then used to rename the columns of the merged data.
+Since we added the last column activities, we also added the name "activities" at the end.
